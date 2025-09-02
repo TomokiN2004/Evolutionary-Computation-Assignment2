@@ -3,4 +3,4 @@ __pycache__/
 *.py[cod]
 
 # Ignore All Data Folders Including Subfolders
-**/run/
+**/run*/

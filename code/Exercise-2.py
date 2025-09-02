@@ -1,17 +1,5 @@
 """
-Exercise 1 – IOH Basic Functionality
---------------------------------------
-
-This script implements a baseline Random Search algorithm using the 
-IOHexperimenter framework. It runs multiple independent trials on 
-selected PBO benchmark problems (OneMax, LeadingOnes, LABS) and 
-logs the results for later analysis with IOHanalyzer.
-
-Author:
-    Kamila Azamova (a1864343)
-
-Date:
-    September 2025
+Please Fill Me In
 """
 
 # Import Libraries

@@ -20,7 +20,7 @@ All experiments are run consistently on selected benchmark problems from the IOH
 
 ## **Project Structure**
 
-```
+```plaintext
 final/
 ├── code/ # All Python Source Code
 │ ├── Exercise-1.py
