@@ -1,10 +1,20 @@
-# **Evolutionary Computation Assignment 1: TSP Solver**
+# **Evolutionary Computation Assignment 2: Pseudo-Boolean Optimisation**
 
 ## **Project Overview**
 
-This project implements a modular, object-oriented Python library to solve the Traveling Salesman Problem *(TSP)* using both local search and evolutionary algorithms, as described in the assignment specification.
+This project implements and analyses a range of iterative search and evolutionary algorithms for **Pseudo-Boolean Optimisation (PBO)** problems, using the [IOHexperimenter](https://iohprofiler.github.io/) benchmarking framework.  
 
-Each major component *(problem representation, operators, population models, selection methods, etc.)* is implemented in a flexible way so that algorithms can be easily extended and compared. All tests are reproducible and all results are recorded for analysis.
+The aim is to gain practical experience with algorithm design, comparison, and analysis by applying different approaches to the PBO benchmark suite. The assignment explores both classical and modern optimisation techniques, highlighting their strengths and weaknesses across a variety of problem types.  
+
+Specifically, the following are covered:
+
+- **Basic exploration** of IOHprofiler functionality with Random Search.  
+- **Implementation and analysis** of Randomised Local Search (RLS) and the (1+1) Evolutionary Algorithm.  
+- **Design and testing** of a Genetic Algorithm (GA) with crossover, mutation, and population-based search.  
+- **Implementation of Ant Colony Optimisation (ACO) methods**, including Max-Min Ant System (MMAS) and MMAS*, based on published research.  
+- **Development of a custom ACO algorithm** and performance comparison against existing ACO variants.  
+
+All experiments are run consistently on selected benchmark problems from the IOHprofiler PBO suite. Results are analysed using [IOHanalyzer](https://iohanalyzer.liacs.nl/), with fixed-budget plots and statistical summaries to compare algorithmic performance.
 
 ---
 
@@ -12,68 +22,53 @@ Each major component *(problem representation, operators, population models, sel
 
 ```
 final/
-├── code/                     # All source code
-│   ├── TSP_class.py          # Core TSP representation and utilities
-│   └── (other modules...)
-├── data/                     # Testing data folder
-│   └── Testing TSPlib Files
-├── results/                  # Output from algorithm runs
-│   ├── local_search.txt
-│   ├── local_search_analysis.txt
-│   ├── your_EA.txt
-│   ├── inverover.txt
-│   └── your_EA_inverover_comparison.txt
-└── doc/
-    ├── readme.md             # ← This File
-    ├── team_contributions.txt
-    └── algorithm_design.txt
+├── code/ # All Python Source Code
+│ ├── Exercise-1.py
+│ ├── (Other Exercises .py ...)
+│
+├── data/ # Raw Results from Experiments
+│ ├── exercise-1/ # Raw Results for Exercise 1
+| ├── (Other Exercises/ ...)
+│ ├── exercise-1-results.zip # Final Results Used for Producing Analysis Figures
+| ├── (Other Exercises .zip ...)
+│
+└── doc/ # Documentation & Analysis
+├── exercise-1/
+│ ├── figures.pdf # Plots Generated via IOHanalyzer
+│ └── analysis.txt # Written Observations & Discussion
+├── (Other Exercises/ ...)
+├── README.md # ← This File
+└── team_contributions.txt # Roles & Contributions of Group Members
 ```
 
 ---
 
 ## **How to Run the Code**
 
-#### **1. Requirements**
+### **1. Requirements**
 
-- Python 3.10 or later
-- Non-standard libraries (install via pip):
+- Python 3.10 or later  
+- Non-standard libraries (install via pip):  
 
-> ```pip install numpy scipy```
-
-*(Standard library modules used include: sys, time, random, statistics, datetime, multiprocessing, pathlib. These do not require installation.)*
-
-#### **2. Run TSP Tests *(Exercises 1–5 & 7 Style Utilities)***
-
-- Use `Test_Functions.py` as the test harness.
-- From the project root:
-
-> ```python3.10 code/Test_Functions.py```
-
-- In `main()` inside `Test_Functions.py`, comment/uncomment the function calls to run
-  specific, isolated tests. An example is below for testing Exercise 3:
-
-```
-    if __name__ == "__main__":
-        # test_tsp_class()
-        # test_permutations()
-        # test_local_search()
-        test_populations()
+```bash
+pip install ioh numpy
 ```
 
-- Results are written to the `results/` directory.
+### **2. Running the Exercises**
 
-#### **3. Run Exercise 6 Experiments (EAs)**
+- Each exercise has a built-in driver script:
 
-- Use `EA_experiments.py` in the same way as `Test_Functions.py`:
-  - Toggle individual experiment functions in its `main()` to run particular EA setups.
-- From the project root:
-    > ```python3.10 code/EA_experiments.py```
-- Results are written to the `results/` directory.
+```bash
+python3.10 code/Exercise-x.py
+```
 
-#### **4. Data Files:**
+- Results are saved to the `data/exercise-x` directory.
 
-- Place input `.tsp` files in the `data/` directory.
-- Only TSPLIB instances with `EDGE_WEIGHT_TYPE: EUC_2D` are supported.
+### **3. Results Files**
+
+- **Raw results:** stored in `data/exercise-x-results.zip` for each exercise.
+- **Figures:** exported as .pdf files in `doc/exercise-x`.
+- **Analysis:** included as part of the documentation for each exercise.
 
 ---
 
@@ -87,5 +82,3 @@ final/
 - Maxwell Busato
 
 ---
-
-Export as pdf.
