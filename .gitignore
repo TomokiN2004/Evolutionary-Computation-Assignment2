@@ -4,3 +4,6 @@ __pycache__/
 
 # Ignore All Data Folders Including Subfolders
 **/run*/
+
+# Ignore Virtual Environment
+venv/
