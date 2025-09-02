@@ -2,5 +2,5 @@
 __pycache__/
 *.py[cod]
 
-# Ignore All Data Folders in Subfolders
-**/data/
+# Ignore All Data Folders Including Subfolders
+**/run/

@@ -38,7 +38,7 @@ labs = get_problem(fid = 18, dimension=50, instance=1, problem_class = ProblemCl
 # Create default logger compatible with IOHanalyzer
 # `root` indicates where the output files are stored.
 # `folder_name` is the name of the folder containing all output. You should compress this folder and upload it to IOHanalyzer
-l = logger.Analyzer(root="data", 
+l = logger.Analyzer(root="data/exercise-1", 
     folder_name="run", 
     algorithm_name="random_search", 
     algorithm_info="test of IOHexperimenter in python")
