@@ -1,0 +1,20 @@
+===================================================================================================
+              CONTRIBUTIONS FOR EVOLUTIONARY COMPUTATION GROUP ASSIGNMENT 2  
+===================================================================================================
+
+DISCLAIMER:  
+While we collaborated as a group and supported each other throughout the project, the following 
+list reflects the primary tasks each member was responsible for overseeing.
+
+---------------------------------------------------------------------------------------------------
+Exercise 1 - Kamila Azamova (A1864343) 
+
+Exercise 2 - Maxwell Busato (A1851532)  
+
+Exercise 3 - Nethmi Ranathunga (A1895261)
+
+Exercise 4 - Tomoki Nonogaki (A1898137) 
+
+Exercise 5 - Emily Carey (A1851030)
+
+---------------------------------------------------------------------------------------------------
