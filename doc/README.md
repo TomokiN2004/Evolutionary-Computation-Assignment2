@@ -33,12 +33,12 @@ final/
 | ├── (Other Exercises .zip ...)
 │
 └── doc/ # Documentation & Analysis
-├── exercise-1/
-│ ├── figures.pdf # Plots Generated via IOHanalyzer
-│ └── analysis.txt # Written Observations & Discussion
-├── (Other Exercises/ ...)
-├── README.md # ← This File
-└── team_contributions.txt # Roles & Contributions of Group Members
+  ├── exercise-1/
+  | ├── figures.pdf # Plots Generated via IOHanalyzer
+  | └── analysis.txt # Written Observations & Discussion
+  ├── (Other Exercises/ ...)
+  ├── README.md # ← This File
+  └── team_contributions.txt # Roles & Contributions of Group Members
 ```
 
 ---
