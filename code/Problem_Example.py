@@ -1,57 +1,109 @@
-from ioh import get_problem, ProblemClass
-from ioh import logger
-import sys
+"""
+Exercise 1 – IOH Basic Functionality
+--------------------------------------
+
+This script implements a baseline Random Search algorithm using the 
+IOHexperimenter framework. It runs multiple independent trials on 
+selected PBO benchmark problems (OneMax, LeadingOnes, LABS) and 
+logs the results for later analysis with IOHanalyzer.
+
+Author:
+    Kamila Azamova (a1864343)
+
+Date:
+    September 2025
+"""
+
+# Import Libraries
+from ioh import get_problem, ProblemClass, logger
 import numpy as np
+import sys
 
-# Please replace this `random search` by your `genetic algorithm`.
-def random_search(func, budget = None):
-    # budget of each run: 50n^2
+
+# Implement Random Search Algorithm
+def random_search(func, budget=None):
+    """
+    Run a Random Search on a given PBO problem.
+
+    Args:
+        func (ioh.problem): The Pseudo-Boolean Optimisation (PBO) problem instance from IOHexperimenter.
+        budget (int, optional): Maximum number of fitness evaluations. Defaults to 50 * n_variables^2.
+
+    Returns:
+        tuple: A pair (best_fitness (float), best_solution (np.ndarray)) where:
+    """
+    # Default Budget = 50 * n^2 if Not Provided
     if budget is None:
-        budget = int(func.meta_data.n_variables * func.meta_data.n_variables * 50)
+        budget = int(func.meta_data.n_variables ** 2 * 50)
 
+    # Special Case: Known Optimum for Function F18 with n=32
     if func.meta_data.problem_id == 18 and func.meta_data.n_variables == 32:
         optimum = 8
     else:
         optimum = func.optimum.y
-    print(optimum)
-    # 10 independent runs for each algorithm on each problem.
-    for r in range(10):
-        f_opt = sys.float_info.min
-        x_opt = None
-        for i in range(budget):
-            x = np.random.randint(2, size = func.meta_data.n_variables)
-            f = func(x)
-            if f > f_opt:
-                f_opt = f
-                x_opt = x
-            if f_opt >= optimum:
+
+    # Display the Target Optimum for the Given Function
+    print(f"Target Optimum: {optimum}")
+
+    # Run the Algorithm 10 times Independently
+    for run in range(10):
+        best_fitness = -sys.float_info.max  # Lowest Possible Start
+        best_solution = None
+
+        # Random Search Loop
+        for _ in range(budget):
+            # Generate a Random Binary Solution
+            candidate = np.random.randint(2, size=func.meta_data.n_variables)
+
+            # Evaluate the Candidate Solution on the Given Problem 
+            fitness = func(candidate)
+
+            # Update Best-So-Far
+            if fitness > best_fitness:
+                best_fitness = fitness
+                best_solution = candidate
+
+            # Stop Early if Optimum Found
+            if best_fitness >= optimum:
                 break
+
+        # Reset Problem for Next Run
         func.reset()
-    return f_opt, x_opt
 
-# Declaration of problems to be tested.
-om = get_problem(fid = 1, dimension=50, instance=1, problem_class = ProblemClass.PBO)
-lo = get_problem(fid = 2, dimension=50, instance=1, problem_class = ProblemClass.PBO)
-labs = get_problem(fid = 18, dimension=50, instance=1, problem_class = ProblemClass.PBO)
+    # Return the Best Result
+    return best_fitness, best_solution
 
 
-# Create default logger compatible with IOHanalyzer
-# `root` indicates where the output files are stored.
-# `folder_name` is the name of the folder containing all output. You should compress this folder and upload it to IOHanalyzer
-l = logger.Analyzer(root="data/exercise-1", 
-    folder_name="run", 
-    algorithm_name="random_search", 
-    algorithm_info="test of IOHexperimenter in python")
+# Main Function to Run the Tests
+def main():
+    """
+    Set up PBO problems, attach logger, and run Random Search.
+    """
+    # Declare Problems to be Tested (Om, LeadingOnes, LABS)
+    problems = [
+        get_problem(fid=1, dimension=50, instance=1, problem_class=ProblemClass.PBO),   # OneMax
+        get_problem(fid=2, dimension=50, instance=1, problem_class=ProblemClass.PBO),   # LeadingOnes
+        get_problem(fid=18, dimension=50, instance=1, problem_class=ProblemClass.PBO)   # LABS
+    ]
+
+    # Create Logger Compatible with IOHanalyzer
+    logger_instance = logger.Analyzer(
+        root="data/exercise-1",
+        folder_name="run",
+        algorithm_name="random_search",
+        algorithm_info="Baseline random search for IOHexperimenter"
+    )
+
+    # Run Random Search on Each Problem
+    for problem in problems:
+        problem.attach_logger(logger_instance)
+        best_f, best_x = random_search(problem)
+        print(f"Best Result for {problem.meta_data.name}: f = {best_f}")
+
+    # Ensure Logger Flushes Remaining Data
+    del logger_instance
 
 
-om.attach_logger(l)
-random_search(om)
-
-lo.attach_logger(l)
-random_search(lo)
-
-labs.attach_logger(l)
-random_search(labs)
-
-# This statemenet is necessary in case data is not flushed yet.
-del l
+# Call & Run Tests
+if __name__ == "__main__":
+    main()
