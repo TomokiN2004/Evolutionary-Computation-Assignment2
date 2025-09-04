@@ -3,9 +3,9 @@ Exercise 1 – IOH Basic Functionality
 --------------------------------------
 
 This script implements a baseline Random Search algorithm using the 
-IOHexperimenter framework. It runs multiple independent trials on 
-selected PBO benchmark problems (OneMax, LeadingOnes, LABS) and 
-logs the results for later analysis with IOHanalyzer.
+IOHexperimenter framework. It runs multiple independent trials on selected PBO 
+benchmark problems (OneMax, LeadingOnes, LABS) and logs the results for later 
+analysis with IOHanalyzer.
 
 Author:
     Kamila Azamova (a1864343)
@@ -26,12 +26,13 @@ def random_search(func, budget=None, trials = 10):
     Run a Random Search on a given PBO problem.
 
     Args:
-        func (ioh.problem): The Pseudo-Boolean Optimisation (PBO) problem instance from IOHexperimenter.
+        func (ioh.problem): The Pseudo-Boolean Optimisation (PBO) problem 
+                            instance from IOHexperimenter.
         budget (int, optional): Maximum number of fitness evaluations.
         trials (int): Number of independent runs.
 
     Returns:
-        tuple: A pair (best_fitness (float), best_solution (np.ndarray)) where:
+        tuple: Returns the (best_fitness, best_solution) of the final trial.
     """
     # Default Budget = 50 * n^2 if Not Provided
     if budget is None:
