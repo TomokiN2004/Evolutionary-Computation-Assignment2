@@ -9,8 +9,14 @@ overseeing.
 
 --------------------------------------------------------------------------------
 Exercise 1 - Kamila Azamova (A1864343) 
+- Refined and commented the code for the IOH basic functionality tasks (Random Search).  
+- Generated and saved the required plots.  
 
 Exercise 2 - Maxwell Busato (A1851532)  
+- Implemented the RLS and (1+1) EA algorithms and updated the IOH functionality tasks.  
+- Generated and saved the required plots.  
+- Kamila completed the analysis for the first three functions.  
+- Maxwell completed the analysis for the remaining four functions.   
 
 Exercise 3 - Nethmi Ranathunga (A1895261)
 
