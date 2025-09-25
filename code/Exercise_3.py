@@ -12,6 +12,7 @@ Date:
 #inside algorithm loop replace random generation with GA loop (population , selection, crossover, mutation, elitism)
 from ioh import get_problem, ProblemClass, logger
 import numpy as np
+import random
 
 class Individual:
     def __init__(self, bitstring, problem):
@@ -22,14 +23,20 @@ class Individual:
     #take in the bistring and problem
     #save them as attributes
     #evaluate the fitness immediately
-    def evaluate(self): #recalculate the fitness from the problem
+    def evaluate(self): #recalculate the fitness from the 
+        fitness = self.problem(self.bitstring) 
+        self.fitness = fitness
+        return self.fitness
     
     @classmethod
     def random(cls, problem): #make random bitstring of length
-        Individual =Individual.random(problem)
-        print(Individual.fitness)
+        variables = problem.meta_data.n_variables
+        bitstring = np.random.randint(2, size=variables).tolist()
+        new_individual = cls(bitstring, problem)
+        return new_individual
         
-    def print_summary(self): #show bitstring and fitness
+    def print_summary(self): #show bitstring and 
+        print(self.bitstring, self.fitness)
 
 class Population:
     def __init__(self, problem , size):
