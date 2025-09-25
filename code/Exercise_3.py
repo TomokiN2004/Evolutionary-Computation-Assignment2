@@ -52,29 +52,33 @@ class Population:
         list_Individual=[]
         for i in range(self.size):
             list_Individual.append(Individual.random(problem))
-        print(list_Individual)
         
         self.individuals = list_Individual
+        print(self.individuals)
+
         
     def best(self):
         #go through self.individuals
         #return the one with highest fitness
+        best_individual = max(self.individuals, key=lambda individual:individual.fitness)
+
+        return best_individual
     
-def individuals:
+# def individuals:
     
-def population:
+# def population:
     
-def tournament_selection: 
+# def tournament_selection: 
     
-def uniform_crossover:
+# def uniform_crossover:
 
-def bit_flip_mutation:
+# def bit_flip_mutation:
 
 
 
-def genetic_algorithm(func, budget=100000, trials = 10):
-    return best_fitness, best_solution
+# def genetic_algorithm(func, budget=100000, trials = 10):
+#     return best_fitness, best_solution
 
-logger_ga = logger.Analzer(root="data/exercise-3", folder_name = "Run-GA", algoithm_name= "GeneticAlgorithm", algorithm_info ="GA With Uniform Crossover and Mutation")
+# logger_ga = logger.Analzer(root="data/exercise-3", folder_name = "Run-GA", algoithm_name= "GeneticAlgorithm", algorithm_info ="GA With Uniform Crossover and Mutation")
 
-def main():
+# def main():
