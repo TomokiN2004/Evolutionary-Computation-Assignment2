@@ -91,13 +91,32 @@ def tournament_selection(population, k, new_size):
     return mating_pool
     
     
-# def uniform_crossover:
-#     #
-
-# # def bit_flip_mutation:
-
-
-
+def uniform_crossover(parent1, parent2):
+    #create empty list to hold the childs bitstring
+    child_bits=[]
+    #loop through each position in parents bitstring
+    for i in range(len(parent1.bitstring)):
+        #take 0.5 from parent 1 else parent 2
+        if random.random() < 0.5:
+            child_bits.append(parent1.bitstring[i])
+        else:
+            child_bits.append(parent2.bitstring[i])
+    return Individual(child_bits, parent1.problem)
+        
+        
+#select individual and return mutated individual    
+def bit_flip_mutation(individual):
+    n = len(individual.bitstring)
+    
+    mutated_bits = individual.bitstring.copy()
+    
+    for i in range(n):
+        if random.random() < 1/n:
+            mutated_bits[i] = 1 - mutated_bits[i]
+        
+    new_Individual = Individual(mutated_bits, individual.problem)
+    return new_Individual
+    
 # def genetic_algorithm(func, budget=100000, trials = 10):
 #     return best_fitness, best_solution
 
