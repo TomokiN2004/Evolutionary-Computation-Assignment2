@@ -2,6 +2,19 @@
 Exercise 3 – Genetic Algorithm
 -----------------------------------------------------------------------------
 
+This script implements a Genetic Algorithm (GA) for Pseudo-Boolean Optimisation 
+(PBO) problems using the IOHexperimenter framework. 
+
+The GA uses:
+  - A parent population of size >= 10
+  - Tournament selection
+  - Uniform crossover
+  - Bit-flip mutation
+  - Elitism (optional, for preserving the best solutions)
+
+The algorithm is run on benchmark problems (F1, F2, F3, F18, F23, F24, F25) 
+with dimension = 100 and a maximum budget of 100,000 evaluations. Results 
+are logged for later analysis with IOHanalyzer.
 
 Author:
     Nethmi Ranathunga (a1895261)
@@ -63,16 +76,25 @@ class Population:
         best_individual = max(self.individuals, key=lambda individual:individual.fitness)
 
         return best_individual
+
+def tournament_selection(population, k, new_size): 
+    #for each new parent pick k random individuals from the population 
+    #choose the one with best fitness
+    #repear until you have new_size parents
+    #output list of individuals (mating pool)
+    mating_pool=[]
+    for i in range(new_size):
+        #pick k random competitors from the population
+        competitors = random.sample(population.individuals, k)
+        winner = max(competitors, key=lambda individual:individual.fitness)
+        mating_pool.append(winner)
+    return mating_pool
     
-# def individuals:
-    
-# def population:
-    
-# def tournament_selection: 
     
 # def uniform_crossover:
+#     #
 
-# def bit_flip_mutation:
+# # def bit_flip_mutation:
 
 
 
