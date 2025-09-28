@@ -18,11 +18,14 @@ Exercise 2 - Maxwell Busato (A1851532) & Mohit Mittal (A1885648)
 - Generated and saved the required plots.  
 - Kamila completed the analysis for the first three functions.  
 - Maxwell completed the analysis for the remaining four functions.
-- Mohit completed both math proofs for the Random Search, RLS and (1+1) EA algorithms,
+- Mohit completed the math proofs for the Random Search, RLS and (1+1) EA algorithms,
   explaining his findings to the group in order to clarify his results. 
+- Maxwell corrected errors in the first math proof and formatted both proofs for 
+  clarity and consistency.
 
 
 Exercise 3 - Nethmi Ranathunga (A1895261)
+
 
 
 Exercise 4 - Tomoki Nonogaki (A1898137) 
@@ -32,5 +35,6 @@ Exercise 4 - Tomoki Nonogaki (A1898137)
 
 
 Exercise 5 - Emily Carey (A1851030)
+
 
 --------------------------------------------------------------------------------
