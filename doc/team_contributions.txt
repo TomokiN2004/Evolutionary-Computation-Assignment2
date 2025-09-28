@@ -12,15 +12,24 @@ Exercise 1 - Kamila Azamova (A1864343)
 - Refined and commented the code for the IOH basic functionality tasks (Random Search).  
 - Generated and saved the required plots.  
 
-Exercise 2 - Maxwell Busato (A1851532)  
+
+Exercise 2 - Maxwell Busato (A1851532) & Mohit Mittal (A1885648) 
 - Implemented the RLS and (1+1) EA algorithms and updated the IOH functionality tasks.  
 - Generated and saved the required plots.  
 - Kamila completed the analysis for the first three functions.  
-- Maxwell completed the analysis for the remaining four functions.   
+- Maxwell completed the analysis for the remaining four functions.
+- Mohit completed both math proofs for the Random Search, RLS and (1+1) EA algorithms,
+  explaining his findings to the group in order to clarify his results. 
+
 
 Exercise 3 - Nethmi Ranathunga (A1895261)
 
+
 Exercise 4 - Tomoki Nonogaki (A1898137) 
+- Tomoki implemented both the MMAS and MMAS* algorithms  and updated the IOH functionality tasks.
+- Maxwell generated and saved the required plots.  
+- Tomoki completed the analysis and comparisons for all 7 functions.
+
 
 Exercise 5 - Emily Carey (A1851030)
 
