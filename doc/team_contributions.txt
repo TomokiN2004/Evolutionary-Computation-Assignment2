@@ -14,8 +14,8 @@ Exercise 1 - Kamila Azamova (A1864343)
 
 
 Exercise 2 - Maxwell Busato (A1851532) & Mohit Mittal (A1885648) 
-- Implemented the RLS and (1+1) EA algorithms and updated the IOH functionality tasks.  
-- Generated and saved the required plots.  
+- Maxwell implemented the RLS and (1+1) EA algorithms and updated the IOH functionality tasks.  
+- Maxwell generated and saved the required plots.  
 - Kamila completed the analysis for the first three functions.  
 - Maxwell completed the analysis for the remaining four functions.
 - Mohit completed the math proofs for the Random Search, RLS and (1+1) EA algorithms,
