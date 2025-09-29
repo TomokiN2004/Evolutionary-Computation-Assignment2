@@ -136,6 +136,8 @@ def genetic_algorithm(problem, budget=100_000, trials=10, pop_size=20):
     #Handle cases such as F18 with n = 32
     if problem.meta_data.problem_id == 18 and problem.meta_data.n_variables == 32:
         optimum = 8
+    elif problem.meta_data.problem_id == 25:
+        optimum= None
     else:
         optimum = problem.optimum.y
     
