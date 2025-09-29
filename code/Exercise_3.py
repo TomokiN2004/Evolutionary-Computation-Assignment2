@@ -182,8 +182,8 @@ def genetic_algorithm(problem, budget=100_000, trials=10, pop_size=20):
                 best_so_far = population.best()
                 
             #stop if optimum found
-            if best_so_far.fitness >= optimum:
-                break 
+            if optimum is not None and best_so_far.fitness >= optimum:
+                break
             
         print(f"Run {run +1} Best For {problem.meta_data.name}: f = {best_so_far.fitness}")
         problem.reset()
