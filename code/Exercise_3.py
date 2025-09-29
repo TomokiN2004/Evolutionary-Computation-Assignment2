@@ -92,11 +92,19 @@ def tournament_selection(population, k, new_size):
     
     
 def uniform_crossover(parent1, parent2):
-    #create empty list to hold the childs bitstring
+    """
+        Perform uniform crossover between two parents.
+        
+        Args:
+            parent1(Individual): First Parent
+            parent2(Individual): Second Parent
+            
+        Returns:
+            Individual: A new offspring individual
+    """
     child_bits=[]
-    #loop through each position in parents bitstring
     for i in range(len(parent1.bitstring)):
-        #take 0.5 from parent 1 else parent 2
+
         if random.random() < 0.5:
             child_bits.append(parent1.bitstring[i])
         else:
@@ -104,10 +112,18 @@ def uniform_crossover(parent1, parent2):
     return Individual(child_bits, parent1.problem)
         
         
-#select individual and return mutated individual    
 def bit_flip_mutation(individual):
-    n = len(individual.bitstring)
+    """
+    Perform bit flip mutation on an individual 
+    Each bit flips with probability 1/n
     
+    Args:
+        Individual (Individual): The individual to mutate
+    
+    Returns:
+        Individual: A new mutated individual
+    """
+    n = len(individual.bitstring)
     mutated_bits = individual.bitstring.copy()
     
     for i in range(n):
@@ -115,11 +131,87 @@ def bit_flip_mutation(individual):
             mutated_bits[i] = 1 - mutated_bits[i]
         
     new_Individual = Individual(mutated_bits, individual.problem)
+    
     return new_Individual
     
-# def genetic_algorithm(func, budget=100000, trials = 10):
-#     return best_fitness, best_solution
+def genetic_algorithm(problem, budget=100_000, trials=10, pop_size=20):
+    #Handle cases such as F18 with n = 32
+    if problem.meta_data.problem_id == 18 and problem.meta_data.n_variables == 32:
+        optimum = 8
+    else:
+        optimum = problem.optimum.y
+    
+    print(f"Target Optimum For {problem.meta_data.name}: {optimum}")
+    
+    for run in range(trials):
+        #intialise the population 
+        population = Population(problem, pop_size)
+        best_so_far = population.best()
+        evaluations  = pop_size
+        
+        #main GA loop
+        while evaluations < budget:
+            #selection
+            parents = tournament_selection(population, k=3, new_size=pop_size)
+            
+            #crossover + mutation 
+            offspring = []
+            for i in range(0, pop_size, 2):
+                parent1 = parents[i]
+                parent2 = parents[(i + 1) % pop_size]
+                
+                child1 = uniform_crossover(parent1, parent2)
+                child2 = uniform_crossover(parent2, parent1)
+                
+                child1 = bit_flip_mutation(child1)
+                child2 = bit_flip_mutation(child2)
+                
+                offspring.append(child1)
+                offspring.append(child2)
+                
+            #elitism 
+            elite = population.best()
+            offspring[random.randrange(len(offspring))] = elite
+            
+            #replace population 
+            population.individuals = offspring[:pop_size]
+            
+            #update evaluations and best 
+            evaluations += pop_size
+            if population.best().fitness > best_so_far.fitness:
+                best_so_far = population.best()
+                
+            #stop if optimum found
+            if best_so_far.fitness >= optimum:
+                break 
+            
+        print(f"Run {run +1} Best For {problem.meta_data.name}: f = {best_so_far.fitness}")
+        problem.reset()
+        
+    return best_so_far.fitness, best_so_far.bitstring
 
-# logger_ga = logger.Analzer(root="data/exercise-3", folder_name = "Run-GA", algoithm_name= "GeneticAlgorithm", algorithm_info ="GA With Uniform Crossover and Mutation")
+def main():
+    log_ga = logger.Analyzer(root="data/exercise-3",
+                             folder_name="Run-GA",
+                             algorithm_name="GeneticAlgorithm",
+                             algorithm_info="Genetic Algorithm with Crossover and Mutation")
 
-# def main():
+    problems = [
+        get_problem(fid=1, dimension=100, instance=1, problem_class=ProblemClass.PBO),   # F1: OneMax
+        get_problem(fid=2, dimension=100, instance=1, problem_class=ProblemClass.PBO),   # F2: LeadingOnes
+        get_problem(fid=3, dimension=100, instance=1, problem_class=ProblemClass.PBO),   # F3: Linear Function
+        get_problem(fid=18, dimension=100, instance=1, problem_class=ProblemClass.PBO),  # F18: LABS
+        get_problem(fid=23, dimension=100, instance=1, problem_class=ProblemClass.PBO),  # F23: N-Queens
+        get_problem(fid=24, dimension=100, instance=1, problem_class=ProblemClass.PBO),  # F24: Concatenated Trap
+        get_problem(fid=25, dimension=100, instance=1, problem_class=ProblemClass.PBO)   # F25: NK Landscapes
+    ]
+
+    for problem in problems:
+        problem.attach_logger(log_ga)
+        genetic_algorithm(problem, budget=100_000, trials=10, pop_size=20)
+
+    del log_ga
+
+
+if __name__ == "__main__":
+    main()
