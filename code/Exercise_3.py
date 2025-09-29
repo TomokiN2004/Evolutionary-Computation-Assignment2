@@ -67,8 +67,6 @@ class Population:
             list_Individual.append(Individual.random(problem))
         
         self.individuals = list_Individual
-        print(self.individuals)
-
         
     def best(self):
         #go through self.individuals
@@ -190,12 +188,13 @@ def genetic_algorithm(problem, budget=100_000, trials=10, pop_size=20):
         
     return best_so_far.fitness, best_so_far.bitstring
 
+
 def main():
     log_ga = logger.Analyzer(root="data/exercise-3",
                              folder_name="Run-GA",
                              algorithm_name="GeneticAlgorithm",
                              algorithm_info="Genetic Algorithm with Crossover and Mutation")
-
+        
     problems = [
         get_problem(fid=1, dimension=100, instance=1, problem_class=ProblemClass.PBO),   # F1: OneMax
         get_problem(fid=2, dimension=100, instance=1, problem_class=ProblemClass.PBO),   # F2: LeadingOnes
