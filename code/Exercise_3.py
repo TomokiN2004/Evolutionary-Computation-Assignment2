@@ -22,118 +22,255 @@ Author:
 Date:
     September 2025
 """
-#inside algorithm loop replace random generation with GA loop (population , selection, crossover, mutation, elitism)
-from ioh import get_problem, ProblemClass, logger
-import numpy as np
+# Import Libraries
 import random
+import numpy as np
+from ioh import get_problem, ProblemClass, logger
+
 
 class Individual:
+    """
+    Represents a single candidate solution (bitstring) for a given problem.
+
+    Attributes:
+        bitstring (list[int]): The binary representation of the solution.
+        problem (callable): The fitness evaluation function provided by the problem.
+        fitness (float): The fitness score of the bitstring evaluated by the problem.
+    """
     def __init__(self, bitstring, problem):
-        self.bitstring = bitstring #actual solution
-        self.problem = problem  #IOH experimenter problem 
-        self.fitness = problem(bitstring) #score returned by the problem for bitstring
+        """
+        Initialise an Individual with a bitstring and problem.
+
+        Args:
+            bitstring (list[int]): A binary list representing the solution.
+            problem (callable): The problem function that evaluates fitness.
+
+        Returns:
+            None
+        """
+        self.bitstring = bitstring # Actual Solution
+        self.problem = problem  # IOH Experimenter Problem 
+        self.fitness = problem(bitstring) # Score Returned by the Problem for Bitstring
     
-    #take in the bistring and problem
-    #save them as attributes
-    #evaluate the fitness immediately
-    def evaluate(self): #recalculate the fitness from the 
+
+    def evaluate(self):
+        """
+        Recalculate the fitness score for the current bitstring.
+
+        Args:
+            None
+
+        Returns:
+            float: The updated fitness score.
+        """
+        # Evaluate Fitness Based on Current Bitstring
         fitness = self.problem(self.bitstring) 
+
+        # Update Stored Fitness
         self.fitness = fitness
+
+        # Return the Recalculated Fitness
         return self.fitness
     
     @classmethod
-    def random(cls, problem): #make random bitstring of length
+    def random(cls, problem):
+        """
+        Create a new Individual with a randomly generated bitstring.
+
+        Args:
+            problem (callable): The problem function that evaluates fitness.
+                                Must have meta_data.n_variables to define length.
+
+        Returns:
+            Individual: A new randomly initialised individual.
+        """
+        # Number of Variables in Problem
         variables = problem.meta_data.n_variables
+
+        # Generate Random 0/1 Bitstring
         bitstring = np.random.randint(2, size=variables).tolist()
+
+        # Create Individual with Generated Bitstring
         new_individual = cls(bitstring, problem)
+
+        # Return New Instance
         return new_individual
         
-    def print_summary(self): #show bitstring and 
+    def print_summary(self):
+        """
+        Print the individual's bitstring and its fitness score.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         print(self.bitstring, self.fitness)
 
+
 class Population:
+    """
+    Represents a collection of Individuals for evolutionary algorithms.
+
+    Attributes:
+        problem (callable): The problem function used to evaluate individuals.
+        size (int): Number of individuals in the population.
+        individuals (list[Individual]): List of individuals in the population.
+    """
     def __init__(self, problem , size):
-        #store problem and size
-        #create size number of random individuals
-        #store them in self.individuals (list)
+        """
+        Initialise a Population with random individuals.
+
+        Args:
+            problem (callable): The problem function for evaluation.
+            size (int): Number of individuals in the population.
+
+        Returns:
+            None
+        """
+        # Store the Problem
         self.problem = problem 
-        self.size = size #how many individuals are inside it
-        #have list of individuals
-        #loop size times and create random individual 
-        #add it to the list
-        #save the list as self.individuals
+
+        # Store Population Size
+        self.size = size
+
+        # Temporary List to Store Created Individuals
         list_Individual=[]
-        for i in range(self.size):
-            list_Individual.append(Individual.random(problem))
         
+        # Create 'size' Individuals
+        for i in range(self.size):
+            # Add Random Individual Each Loop
+            list_Individual.append(Individual.random(problem))
+
+         # Store Individuals in Population
         self.individuals = list_Individual
         
     def best(self):
-        #go through self.individuals
-        #return the one with highest fitness
+        """
+        Get the best individual (highest fitness) in the population.
+
+        Args:
+            None
+
+        Returns:
+            Individual: The best individual in the population.
+        """
+        # Select the Individual with Maximum Fitness
         best_individual = max(self.individuals, key=lambda individual:individual.fitness)
 
+        # Return the Best One
         return best_individual
 
+
+# Implement Tournament Selection Method
 def tournament_selection(population, k, new_size): 
-    #for each new parent pick k random individuals from the population 
-    #choose the one with best fitness
-    #repear until you have new_size parents
-    #output list of individuals (mating pool)
+    """
+    Perform tournament selection to create a mating pool.
+
+    Args:
+        population (Population): The population to select from.
+        k (int): Number of individuals to sample per tournament.
+        new_size (int): Number of parents to select (mating pool size).
+
+    Returns:
+        list[Individual]: The selected individuals forming the mating pool.
+    """
+    # Initialise Empty Mating Pool
     mating_pool=[]
+
+    # Repeat Selection Until Mating Pool Reaches Desired Size
     for i in range(new_size):
-        #pick k random competitors from the population
+        # Randomly Pick k Competitors
         competitors = random.sample(population.individuals, k)
+         # Choose Best Competitor
         winner = max(competitors, key=lambda individual:individual.fitness)
+        # Add Winner to Mating Pool
         mating_pool.append(winner)
+
+    # Return Full Mating Pool
     return mating_pool
     
-    
+
+# Implement Uniform Crossover Method
 def uniform_crossover(parent1, parent2):
     """
-        Perform uniform crossover between two parents.
+    Perform uniform crossover between two parents.
         
-        Args:
-            parent1(Individual): First Parent
-            parent2(Individual): Second Parent
+    Args:
+        parent1 (Individual): The first parent individual.
+        parent2 (Individual): The second parent individual.
             
-        Returns:
-            Individual: A new offspring individual
+    Returns:
+        Individual: A new offspring created by combining bits from both parents.
     """
+    # Empty List to Store the Child's Bitstring
     child_bits=[]
-    for i in range(len(parent1.bitstring)):
 
+    # Loop Over all Bit Positions
+    for i in range(len(parent1.bitstring)):
+        # With 50% Probability, take the Bit from parent1
         if random.random() < 0.5:
             child_bits.append(parent1.bitstring[i])
+        # Otherwise take from parent2
         else:
             child_bits.append(parent2.bitstring[i])
+
+    # Create a New Individual with the Child Bitstring
     return Individual(child_bits, parent1.problem)
         
-        
+
+# Implement Bit Flip Mutation Method
 def bit_flip_mutation(individual):
     """
-    Perform bit flip mutation on an individual 
-    Each bit flips with probability 1/n
+    Perform bit flip mutation on an individual.
+    Each bit flips with probability 1/n, where n is the bitstring length.
     
     Args:
-        Individual (Individual): The individual to mutate
+        individual (Individual): The individual to mutate.
     
     Returns:
-        Individual: A new mutated individual
+        Individual: A new mutated individual.
     """
+    # Length of Bitstring (Number of Variables)
     n = len(individual.bitstring)
+
+    # Copy the Bitstring so Original Remains Unchanged
     mutated_bits = individual.bitstring.copy()
     
+    # Loop through Each Bit
     for i in range(n):
+        # With Probability 1/n, Flip the Bit (0 -> 1, 1 -> 0)
         if random.random() < 1/n:
             mutated_bits[i] = 1 - mutated_bits[i]
-        
+    
+    # Create a New Individual with the Mutated Bitstring
     new_Individual = Individual(mutated_bits, individual.problem)
     
+    # Return the Mutated Individual
     return new_Individual
     
+
+# Construct a Genetic Algorithm 
 def genetic_algorithm(problem, budget=100_000, trials=10, pop_size=20):
-    #Handle cases such as F18 with n = 32
+    """
+    Run a Genetic Algorithm (GA) on a given problem.
+
+    Args:
+        problem (callable): The problem instance with evaluation and metadata.
+        budget (int, optional): Maximum number of fitness evaluations allowed.
+                                Defaults to 100,000.
+        trials (int, optional): Number of independent GA runs to perform.
+                                Defaults to 10.
+        pop_size (int, optional): Number of individuals in the population.
+                                  Defaults to 20.
+
+    Returns:
+        tuple:
+            - float: Fitness of the best individual found.
+            - list[int]: Bitstring of the best individual.
+    """
+    # Handle Special Cases For Defining the Optimum
     if problem.meta_data.problem_id == 18 and problem.meta_data.n_variables == 32:
         optimum = 8
     elif problem.meta_data.problem_id == 25:
@@ -141,62 +278,84 @@ def genetic_algorithm(problem, budget=100_000, trials=10, pop_size=20):
     else:
         optimum = problem.optimum.y
     
+    # Print the Target Optimum for Reference
     print(f"Target Optimum For {problem.meta_data.name}: {optimum}")
     
+    # Run the GA for the Specified Number of Trials
     for run in range(trials):
-        #intialise the population 
+        # Intialise the Population 
         population = Population(problem, pop_size)
+
+        # Track the Best Solution so far
         best_so_far = population.best()
+
+        # Count Initial Evaluations
         evaluations  = pop_size
         
-        #main GA loop
+        # Main Genetic Algorithm Loop
         while evaluations < budget:
-            #selection
+            # Selection
             parents = tournament_selection(population, k=3, new_size=pop_size)
             
-            #crossover + mutation 
-            offspring = []
+            # Crossover + Mutation 
+            offspring = [] # Store New Offspring
+
+            # Process Parents in Pairs
             for i in range(0, pop_size, 2):
                 parent1 = parents[i]
                 parent2 = parents[(i + 1) % pop_size]
                 
+                # Perform Crossover to Create Two Children
                 child1 = uniform_crossover(parent1, parent2)
                 child2 = uniform_crossover(parent2, parent1)
                 
+                # Apply Mutation to Both Children
                 child1 = bit_flip_mutation(child1)
                 child2 = bit_flip_mutation(child2)
                 
+                # Add Children to Offspring List
                 offspring.append(child1)
                 offspring.append(child2)
                 
-            #elitism 
+            # Elitism 
             elite = population.best()
+            # Replace a Random Offspring with the Elite to Preserve Best Solution
             offspring[random.randrange(len(offspring))] = elite
             
-            #replace population 
+            # Replace Population 
             population.individuals = offspring[:pop_size]
             
-            #update evaluations and best 
+            # Update Evaluations & Best so far 
             evaluations += pop_size
             if population.best().fitness > best_so_far.fitness:
                 best_so_far = population.best()
                 
-            #stop if optimum found
+            # Stop if Optimum Found
             if optimum is not None and best_so_far.fitness >= optimum:
                 break
-            
-        print(f"Run {run +1} Best For {problem.meta_data.name}: f = {best_so_far.fitness}")
-        problem.reset()
         
+        # Print Best Result from Trial No. X (Final Parent Fitness)
+        print(f"Run {run +1} Best For {problem.meta_data.name}: f = {best_so_far.fitness}")
+        
+        # Reset Problem for Next Run
+        problem.reset()
+    
+    # Return Best Fitness & Bitstring found across all trials
     return best_so_far.fitness, best_so_far.bitstring
 
 
+# Main Function to Run the Tests
 def main():
+    """
+    Set up PBO problems, attach logger, and run Random Search.
+    """
+    # Create Logger for the Random Search Algorithm
     log_ga = logger.Analyzer(root="data/exercise-3",
                              folder_name="Run-GA",
                              algorithm_name="GeneticAlgorithm",
                              algorithm_info="Genetic Algorithm with Crossover and Mutation")
-        
+    
+    # Declare Problems to be Tested (Om, LeadingOnes, LABS, etc.)
     problems = [
         get_problem(fid=1, dimension=100, instance=1, problem_class=ProblemClass.PBO),   # F1: OneMax
         get_problem(fid=2, dimension=100, instance=1, problem_class=ProblemClass.PBO),   # F2: LeadingOnes
@@ -207,12 +366,15 @@ def main():
         get_problem(fid=25, dimension=100, instance=1, problem_class=ProblemClass.PBO)   # F25: NK Landscapes
     ]
 
+    # Run the GA on all Problems
     for problem in problems:
         problem.attach_logger(log_ga)
         genetic_algorithm(problem, budget=100_000, trials=10, pop_size=20)
-
+    
+    # Ensure Logger Flushes Remaining Data
     del log_ga
 
 
+# Call & Run Tests
 if __name__ == "__main__":
     main()
