@@ -1,0 +1,21 @@
+On the LABS (Low Autocorrelation Binary Sequence) problem, the comparative performance of MMAS, MMAS*, OnePlusOne EA, RLS, and Random Search reveals
+differences in how these algorithms navigate a highly multimodal landscape. The LABS problem is notorious for its many local optima, making effective 
+exploration and controlled exploitation are crucial for success.
+
+Random Search's initial improvements are rapid, as some solutions naturally yield low autocorrelation. However, the best-so-far values plateauing 
+near between 2 and 3. The narrowing variance indicates that nearly all runs converge to the same level. This is indicating it's inability to 
+escape local traps due to not being able to accumulate knowledge.
+
+RLS and OnePlusOne EA starts slowly but soon enters a phase of rapid progress and overtakes Random Search at around 12 or 13 evaluations. And this rapid
+progress phase finishes at around 500 evaluations. RLS's curve flattens almost completely, and it's performance plateaus close to 3.7. It's wide standard 
+deviation across runs illustrates that there were some runs that it was able to escape from local optima. However, most runs are restricted by inability
+to perform necessary multi-bit escapes. In contrast, OnePlusOne EA keeps improving bit by bit even after 500 evaluations and ended up with best-so-far 
+value around 3.8. This means it can escape from local optima by multi-bit mutations that are occasionally happening.
+
+MMAS and MMAS* begin with rapid growth. They make notable gains similar to EAs but with some lag in early search. When pheromone sufficiently accumulated
+they keep growing even after RLS and OnePlusOne EA almost stop growing and end up reaching best-so-far value of 4 in both MMAS and MMAS*. 
+This is showing that MMAS variants, when sufficiently accumulated, can rival EAs in multimodal scenarios. MMAS* occasionally adapts 
+to optimal regions faster, but both methods display similar final quality.
+
+In conclusion, for LABS, adaptive algorithms like MMAS variants and OnePlusOne EA outperform local-only and random strategies, especially by escaping 
+complex landscapes and making the most of promising regions, while Random Search and RLS remain trapped by the problem's ruggedness.
