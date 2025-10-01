@@ -1,0 +1,20 @@
+This analysis corresponds to NK Landscapes' problem. This problem is defined with many local optima and it brings a challenge to all algorithms and
+allows us to see the performance trends among them. For F25, the graph reveals clear differences in the final performance of each algorithm.
+
+Random Search shows some improvement initially due to its exploratory nature, but it quickly stagnates, resulting in low final solution quality. RLS 
+makes steady progress at first thanks to its local search mechanism, but the rugged and epistatic structure of the problem causes it to plateau. OnePlusOne
+EA demonstrates the most stable growth, ultimately reaching the highest final value among all algorithms. Its occasional multi-bit flips allow it to escape from 
+local optima more effectively, leveraging the strengths of evolutionary strategies.
+
+The comparison between MMAS and MMAS* shows an interesting result. In this graph, MMAS surpasses MMAS* in final performance. This suggests 
+that MMAS, which updates pheromone based on the iteration's best solution maintained a better balance between exploration and exploitation, helping it avoid 
+premature convergence. On the other hand, MMAS*, which focuses on pheromone updating on the global best solution may have converged too early to 
+a suboptimal region results in lower final solution quality.
+
+This difference can be traced back to each algorithm's pheromone update scheme. MMAS*'s strong dependence on the global best increases the risk of 
+losing diversity and getting trapped in local optima. Especially in highly multimodal landscapes such as this problem. In contrast, MMAS's iterative 
+updating better preserved exploration diversity, meaning higher robustness in this problem.
+
+In summary, for F25, OnePlusOne EA outperformed all other algorithms, with MMAS and MMAS* next. And RLS and Random Search struggled. The differences 
+between MMAS and MMAS* performance shows the trade-off between convergence speed and diversity preservation. In problems which have many local optima, 
+maintaining diversity leads to superior final results.
