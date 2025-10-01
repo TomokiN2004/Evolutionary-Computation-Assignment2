@@ -25,7 +25,9 @@ Exercise 2 - Maxwell Busato (A1851532) & Mohit Mittal (A1885648)
 
 
 Exercise 3 - Nethmi Ranathunga (A1895261)
-
+- Implemented a custom Genetic Algorithm and updated the IOH functionality tasks.
+- Generated and saved the required plots. 
+- Completed the analysis and comparisons for all 7 functions.
 
 
 Exercise 4 - Tomoki Nonogaki (A1898137) 
