@@ -13,7 +13,7 @@ Date:
     September 2025
 """
 
-
+#Import Libraries
 import numpy as np
 from ioh import get_problem, ProblemClass, logger
 
@@ -49,7 +49,7 @@ def ACO(func, budget=100_000, n_ants=20, evaporation=0.9, trials=10):
         while eval < budget:
             solutions, fitnesses = [], []
 
-            # Each ant constructs a solution for j = 1, . . . , na do (pseduo code)
+            # Each ant constructs a solution 
             for _ in range(n_ants):
 
                 # Construct solution (T) where the solution is built probabilistically based on pheromone values
