@@ -31,12 +31,14 @@ Exercise 3 - Nethmi Ranathunga (A1895261)
 
 
 Exercise 4 - Tomoki Nonogaki (A1898137) 
-- Tomoki implemented both the MMAS and MMAS* algorithms  and updated the IOH functionality tasks.
+- Tomoki implemented both the MMAS and MMAS* algorithms and updated the IOH functionality tasks.
 - Maxwell generated and saved the required plots.  
 - Tomoki completed the analysis and comparisons for all 7 functions.
 
 
 Exercise 5 - Emily Carey (A1851030)
-
+- Emily implemented a custom Ant Colony Optimisation algorithm and updated the IOH functionality tasks.
+- Kamila generated and saved the required plots.  
+- Emily completed the analysis and comparisons for all 7 functions.
 
 --------------------------------------------------------------------------------
