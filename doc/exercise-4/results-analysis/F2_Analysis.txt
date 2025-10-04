@@ -1,15 +1,12 @@
 For the LeadingOnes problem, the relative performance of MMAS, MMAS*, OnePlusOne EA, RLS, and Random Search exposes how each algorithm handles sequential dependencies in solution construction. 
 LeadingOnes rewards solutions with long consecutive sequences of 1s at the start of the bit string. And it improves only by flipping the leftmost incorrect bit. This property highly constrains 
 productive directions in the search space.
-
 Random Search is notably ineffective on this problem, as the chance of randomly constructing a long bit string of 1s is low. Its progress plateaus early after luckily flipping the 2 leftmost bits to 1. 
 Both RLS and OnePlusOne EA initially struggle with a flat performance period if the first bit is zero, making progress impossibleuntil the leftmost incorrect bit is flipped to 1. After this issue is resolved, 
 algorithms begin to improve the solution step by step. RLS generally outpaces OnePlusOne EA because its strict single bit flips avoid undoing earlier progress, while OnePlusOne EA's multi-bit 
 mutations sometimes break existing prefixes. Despite this, both converge to the optimum, but RLS gets to the optimum slightly faster than OnePlusOne.
-
 MMAS and MMAS* show a delayed but competitive rise. Their progress in early evaluations is modest, as the pheromone values must first accumulate enough signal to favor correct bit positions in the necessary sequence.
 Once pheromone is sufficiently accumulated, MMAS-based solutions make more rapid gains, steadily extending leading 1s. MMAS* might demonstrate slightly faster adaptation in some instances, likely due to its more
 aggressive exploitation of successful paths. Both MMAS variants eventually catch up with the EAs and plateau at the optimum, though most of the time with a tiny lag compared to RLS and OnePlusOne speed.
-
 In summary, for LeadingOnes, RLS has a small but obvious advantage of a single bit mutation that aligns with this problem. MMAS and MMAS* closely match EAs' performance after their pheromone is sufficiently accumulated. 
 Random Search remains inefficient throughout.
