@@ -1,9 +1,22 @@
-For the OneMax problem, the performance trends across MMAS, MMAS*, OnePlusOne EA, RLS, and Random Search show clear patterns that highlight 
-both their similarities and fundamental distinctions. The OneMax's simplicity results in most algorithms making steady progress.
-Random Search achieves only slight improvement initially, quickly stagnating at suboptimal fitness value due to its inability to exploit accumulated knowledge for systematic progress.
-As a result, its best-so-far curves plateau. In contrast, RLS and OnePlusOne EA are efficiently climbing towards the global optimum. 
-MMAS and MMAS* are both based on Ant Colony Optimization principles, exhibit a learning curve that initially lags behind RLS and OnePlusOne EA. Early in the evaluation process, MMAS and MMAS* 
-demonstrate gradual improvements as pheromone trails adapt, but after sufficient learning, their increases in fitness become more rapid. And it enalbes them to catch up with and closely mirror the 
-slopes RLS and OnePlusOne have as the run progresses. Their convergence times are only a step behind the evolutionary algorithms and distinctly superior to Random Search.
-In summary, for OneMax, all systematic search algorithms reliably get to optimal solutions with only small differences in speed and consistency. MMAS variants closely match EAs once pheromone guidance 
-strengthens and helping their effectiveness on simple landscapes while Random Search falls far behind.  
+For the OneMax problem, the performance trends across MMAS, MMAS*, OnePlusOne EA, 
+RLS, and Random Search show clear patterns that highlight both their similarities 
+and fundamental distinctions. The OneMax's simplicity results in most algorithms 
+making steady progress.
+
+Random Search achieves only slight improvement initially, quickly stagnating at 
+suboptimal fitness value due to its inability to exploit accumulated knowledge 
+for systematic progress. As a result, its best-so-far curves plateau. In contrast, 
+RLS and OnePlusOne EA are efficiently climbing towards the global optimum. 
+
+MMAS and MMAS* are both based on Ant Colony Optimisation principles, exhibit a 
+learning curve that initially lags behind RLS and OnePlusOne EA. Early in the 
+evaluation process, MMAS and MMAS* demonstrate gradual improvements as pheromone 
+trails adapt, but after sufficient learning, their increases in fitness become 
+more rapid. And it enalbes them to catch up with and closely mirror the slopes 
+RLS and OnePlusOne have as the run progresses. Their convergence times are only 
+a step behind the evolutionary algorithms and distinctly superior to Random Search.
+
+In summary, for OneMax, all systematic search algorithms reliably get to optimal 
+solutions with only small differences in speed and consistency. MMAS variants 
+closely match EAs once pheromone guidance strengthens and helping their 
+effectiveness on simple landscapes while Random Search falls far behind.  

@@ -1,15 +1,32 @@
-For the N-Queens problem, the comparison between MMAS, MMAS*, OnePlusOne EA, RLS, and Random Search provides critical insight into how each algorithm
-exploits structure in a rugged combinatorial landscape. The objective is to arrange queens on a board such that no two threaten 
-each other. Optimally a solution achieves a value of 10. 
-Random Search, RLS, and OnePlusOne EA display distinct growth patterns during optimization. Random Search achieves rapid early improvements by chance,
-but quickly plateaus as it fails to leverage historical information or systematically exploit the problem's structure.
-RLS shows steady initial improvement, but after around 400 evaluations, it plateaus and never gets to best-so-far value of 10. OnePlusOne EA 
-starts similarly but can occasionally escape local optima by performing rare multi-bit mutations, leading to the highest best-so-far value.
-MMAS and MMAS* reveal that the MMAS variants spend their early evaluations learning effective solution features through pheromone adaptation. 
-MMAS and MMAS* begin with rapid growth. RLS and OnePlusOne EA overtake them at around 50 evaluations, but as pheromone trails grow stronger, 
-MMAS and MMAS* accelerate and ultimately match the best performances of OnePlusOne EA sometimes. MMAS* sometimes converges slightly faster, 
-potentially due to less restrictive pheromone bounds. Both methods consistently outperform Random Search and rival or surpass RLS in 
-escaping deep local optima, even though all algorithms remain challenged by the problem's inherent ruggedness and rarely reach the global optimum.
-In conclusion, while Random Search and RLS are constrained by their limited search mechanisms and quickly reach plateaus, OnePlusOne EA's adaptive mutation gives
-it a tangible advantage in escaping suboptimal regions. MMAS and MMAS* prove to be strong competitors with their ability to learn and exploit global patterns.
-However, the ultimate solution quality across all algorithms is bounded by the complexity and nature of the problem.
+For the N-Queens problem, the comparison between MMAS, MMAS*, OnePlusOne EA, RLS, 
+and Random Search provides critical insight into how each algorithm exploits 
+structure in a rugged combinatorial landscape. The objective is to arrange queens
+on a board such that no two threaten each other. Optimally a solution achieves a 
+value of 10. 
+
+Random Search, RLS, and OnePlusOne EA display distinct growth patterns during 
+optimisation. Random Search achieves rapid early improvements by chance, but 
+quickly plateaus as it fails to leverage historical information or systematically 
+exploit the problem's structure.
+
+RLS shows steady initial improvement, but after around 400 evaluations, it 
+plateaus and never gets to best-so-far value of 10. OnePlusOne EA starts similarly
+but can occasionally escape local optima by performing rare multi-bit mutations, 
+leading to the highest best-so-far value.
+
+MMAS and MMAS* reveal that the MMAS variants spend their early evaluations 
+learning effective solution features through pheromone adaptation. MMAS and MMAS* 
+begin with rapid growth. RLS and OnePlusOne EA overtake them at around 50 
+evaluations, but as pheromone trails grow stronger, MMAS and MMAS* accelerate and 
+ultimately match the best performances of OnePlusOne EA sometimes. MMAS* sometimes 
+converges slightly faster, potentially due to less restrictive pheromone bounds. 
+Both methods consistently outperform Random Search and rival or surpass RLS in 
+escaping deep local optima, even though all algorithms remain challenged by the 
+problem's inherent ruggedness and rarely reach the global optimum.
+
+In conclusion, while Random Search and RLS are constrained by their limited 
+search mechanisms and quickly reach plateaus, OnePlusOne EA's adaptive mutation 
+gives it a tangible advantage in escaping suboptimal regions. MMAS and MMAS* 
+prove to be strong competitors with their ability to learn and exploit global 
+patterns. However, the ultimate solution quality across all algorithms is bounded 
+by the complexity and nature of the problem.

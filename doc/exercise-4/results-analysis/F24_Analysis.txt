@@ -1,10 +1,24 @@
-MMAS, MMAS*, Random Search, RLS, and OnePlusOne EA all exhibit characteristic growth patterns on the Concatenated Trap problem. 
-Random Search shows relatively rapid progress in the initial stages, but subsequently stagnates, with its best achieved value ultimately stabilising around 12.　In contrast, RLS and OnePlusOne EA start 
-slowly but accelerate rapidly. RLS stagnates early, whereas OnePlusOne EA achieves slight additional improvements through rare multi-point mutations, settling at a final value around 16.4 – a marginally 
-higher level than RLS.
-MMAS and MMAS* exhibit intriguing characteristics compared to these conventional methods. Both initially exhibit growth similar to Random Search despite lacking pheromone accumulation. 
-Around 20 evaluations, their growth weakens slightly, allowing RLS and OnePlusOne EA to overtake them. However, beyond approximately 50 evaluations, accumulated pheromone enables renewed 
-rapid growth, ultimately reaching solution quality levels comparable to RLS and OnePlusOne EA.　Interestingly, from around 2000 evaluations, MMAS* grew significantly faster than MMAS and maintained 
-this advantage until reaching the budget limit of 100,000. This is likely because MMAS*'s characteristic of updating pheromones while referencing the global best-so-far solution enhanced its 
-search towards the global optimum solution for this problem.
-Overall, Random Search demonstrated the lowest performance, whilst the other algorithms exhibited similar final results but distinct growth patterns.
+MMAS, MMAS*, Random Search, RLS, and OnePlusOne EA all exhibit characteristic 
+growth patterns on the Concatenated Trap problem. 
+
+Random Search shows relatively rapid progress in the initial stages, but 
+subsequently stagnates, with its best achieved value ultimately stabilising 
+around 12.　In contrast, RLS and OnePlusOne EA start slowly but accelerate rapidly. 
+RLS stagnates early, whereas OnePlusOne EA achieves slight additional improvements 
+through rare multi-point mutations, settling at a final value around 
+16.4 – a marginally higher level than RLS.
+
+MMAS and MMAS* exhibit intriguing characteristics compared to these conventional 
+methods. Both initially exhibit growth similar to Random Search despite lacking 
+pheromone accumulation. Around 20 evaluations, their growth weakens slightly, 
+allowing RLS and OnePlusOne EA to overtake them. However, beyond approximately 
+50 evaluations, accumulated pheromone enables renewed rapid growth, ultimately 
+reaching solution quality levels comparable to RLS and OnePlusOne EA. 
+Interestingly, from around 2000 evaluations, MMAS* grew significantly faster 
+than MMAS and maintained this advantage until reaching the budget limit of 
+100,000. This is likely because MMAS*'s characteristic of updating pheromones 
+while referencing the global best-so-far solution enhanced its search towards the 
+global optimum solution for this problem.
+
+Overall, Random Search demonstrated the lowest performance, whilst the other 
+algorithms exhibited similar final results but distinct growth patterns.

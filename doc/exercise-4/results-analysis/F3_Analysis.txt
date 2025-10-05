@@ -1,12 +1,25 @@
-For the Linear Function with Harmonic Weights problem, the comparison of MMAS, MMAS*, OnePlusOne EA, RLS, and Random Search provides clear insight
-into each algorithm's capacity to systematically improve solutions. In this setup, each bit contributes to the solution with weights. Therefore, 
-algorithms that can reliably identify and preserve improvements are likely to converge faster.
-Random Search demonstrates characteristically weak performance, showing only slow incremental gains over the evaluation period. Although some 
-early improvements occur by chance; the inability to retain knowledge results in the best-so-far values plateauing far below the global optimum.
-And it's finishing with the values around 3500 - 4000.
-RLS and OnePlusOne are both well suited for this linear additive problem. Both algorithms exhibit a phase of solution refinement but rapidly climbes
-a steep ascent toward the global optimum. 
-MMAS and MMAS* grow faster than RLS and OnePlusOne at the beginning despite the thought of them taking more time to grow to accumulate pheromone values
-at the beginning. Ascent gets less steep, and they get overtaken by RLS and OnePlusOne EA but they continue to grow gradually. Ultimately both converge
-global optimum with consistency similar to RLS and OnePlusOne EA, and much higher than Random Search.
-Overall, F3 highlights that all systematic algorithms achieve reliable convergence, while Random Search trails far behind due to its non-accumulative nature.
+For the Linear Function with Harmonic Weights problem, the comparison of MMAS, 
+MMAS*, OnePlusOne EA, RLS, and Random Search provides clear insight into each 
+algorithm's capacity to systematically improve solutions. In this setup, each 
+bit contributes to the solution with weights. Therefore, algorithms that can 
+reliably identify and preserve improvements are likely to converge faster.
+
+Random Search demonstrates characteristically weak performance, showing only slow 
+incremental gains over the evaluation period. Although some early improvements 
+occur by chance; the inability to retain knowledge results in the best-so-far 
+values plateauing far below the global optimum. And it's finishing with the values 
+around 3500 - 4000.
+
+RLS and OnePlusOne are both well suited for this linear additive problem. Both 
+algorithms exhibit a phase of solution refinement but rapidly climbes a steep 
+ascent toward the global optimum. 
+
+MMAS and MMAS* grow faster than RLS and OnePlusOne at the beginning despite the 
+thought of them taking more time to grow to accumulate pheromone values at the 
+beginning. Ascent gets less steep, and they get overtaken by RLS and OnePlusOne
+EA but they continue to grow gradually. Ultimately both converge global optimum 
+with consistency similar to RLS and OnePlusOne EA, and much higher than Random 
+Search.
+
+Overall, F3 highlights that all systematic algorithms achieve reliable convergence, 
+while Random Search trails far behind due to its non-accumulative nature.
